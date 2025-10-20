@@ -1,4 +1,4 @@
-# 🎯 HackerSchool - Terminal de Recrutamento
+# 🎯 HackerSchool Recruitment System - HRS
 
 <div align="center">
 
@@ -128,4 +128,5 @@ Criado com ❤️ para encontrar os melhores talentos.
 **Pronto para o desafio? Boa sorte! 🔥**
 
 </div>
+
 
