@@ -529,7 +529,6 @@ async function connectNetwork(terminal) {
     terminal.echo(`[[;#FCE94F;]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]`);
     terminal.echo(`[[;#888888;]O grupo xad0w.b1ts infiltrou-se no sistema.]`);
     terminal.echo(`[[;#888888;]Vários ficheiros foram comprometidos com dados falsos.]`);
-    terminal.echo(`[[;#888888;]Procura apenas informação de fontes [SEGURO ✓]]`);
     terminal.echo(`\n[[;#0ff;]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]`);
     terminal.echo(`[[;#0ff;]PRÓXIMO PASSO: Autenticação]`);
     terminal.echo(`[[;#0ff;]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]`);
