@@ -2,9 +2,9 @@
 
 <div align="center">
 
-![HackerSchool](https://img.shields.io/badge/HackerSchool-IST-green?style=for-the-badge)
+![HackerSchool](https://img.shields.io/badge/HackerSchool-IST-blue?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
-![Phase](https://img.shields.io/badge/Phase-1-blue?style=for-the-badge)
+
 
 **Desafio de recrutamento interativo baseado em terminal Unix**
 
@@ -24,8 +24,7 @@ Um desafio de recrutamento imersivo onde usas comandos Unix para navegar num ter
 - 🔐 **Sistema de encriptação** e autenticação
 - 💀 **xad0w.b1ts** - Grupo hacker adversário que tenta sabotar
 - 🎬 **Animações épicas** - Glitch effects, recovery sequences, vórtex digital
-- 📍 **Integração física** - QR codes escondidos no mundo real
-- 🧩 **Puzzles multi-camada** - Braille, coordenadas GPS, ficheiros escondidos
+- 🧩 **Puzzles multi-camada** - escape room com aesthetics hacker pretty much
 
 ---
 
@@ -52,7 +51,6 @@ help            # Mostra ajuda
 
 ### 4. Completa a Missão
 - 📚 Encontra artefactos no mundo real
-- 📱 Scan QR codes
 - 🤝 Junta-te à equipa!
 
 ---
@@ -117,7 +115,7 @@ A HackerSchool é um núcleo de estudantes do Instituto Superior Técnico dedica
 
 Parte do processo de recrutamento da HackerSchool IST.
 
-O emulador de terminal UNIX usado neste projeto foi originalmente desenvolvido pelo fellow hacker **André Santos** (a.k.a Billy) - [@Billybs](https://github.com/Billybs). Agradecemos a sua contribuição fundamental para tornar este desafio interativo possível! 🚀
+O emulador de terminal UNIX usado neste projeto foi originalmente desenvolvido pelo fellow hacker **André Santos** (a.k.a Billy or [@Billybs](https://github.com/Billybs)). Sem ele este desafio interativo não seria possível!
 
 Criado com ❤️ para encontrar os melhores talentos.
 
