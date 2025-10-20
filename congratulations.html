@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parabéns! - HackerSchool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Courier New', monospace;
+            color: #0f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(0, 255, 0, 0.5); }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        .success-banner {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #0f0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .checkmark {
+            font-size: 4em;
+            color: #0f0;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .mission-info {
+            margin: 30px 0;
+            padding: 20px;
+            border-left: 3px solid #0f0;
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .mission-info h2 {
+            color: #0f0;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .mission-info p {
+            margin: 10px 0;
+            line-height: 1.8;
+            color: #b0ffb0;
+        }
+
+        .location-box {
+            background: rgba(255, 255, 0, 0.1);
+            border: 2px dashed #ff0;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .location-box h3 {
+            color: #ff0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .location-box p {
+            color: #ffff99;
+            font-size: 1.1em;
+        }
+
+        .countdown {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.2em;
+        }
+
+        .countdown-timer {
+            font-size: 2em;
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
+            margin: 10px 0;
+        }
+
+        .warning {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #f00;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            color: #ff9999;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #0f0;
+            color: #888;
+        }
+
+        .logo {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5em;
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .mission-info p {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            ╔══════════════════════════════════════╗<br>
+            ║        🎯  HACKERSCHOOL  🎯          ║<br>
+            ╚══════════════════════════════════════╝
+        </div>
+
+        <h1>🎉 PARABÉNS, RECRUTA! 🎉</h1>
+
+        <div class="success-banner">
+            <div class="checkmark">✓</div>
+            <h2>FASE 1 CONCLUÍDA COM SUCESSO!</h2>
+        </div>
+
+        <div class="mission-info">
+            <h2>📋 MISSÃO CUMPRIDA</h2>
+            <p>
+                Conseguiste aceder à rede segura da HackerSchool,
+                evitar as armadilhas deixadas pelos xad0w.b1ts,
+                identificar os ficheiros ÍNTEGROS, decifrar as coordenadas
+                misteriosas e localizar o artefacto escondido na biblioteca!
+            </p>
+            <p>
+                A tua capacidade de resolver problemas, preserverança e de pensar de forma crítica impressionou-nos.
+                És exatamente o tipo de pessoa que procuramos na HackerSchool! 💻
+            </p>
+        </div>
+
+        <div class="location-box">
+            <h3>📍 FASE 2</h3>
+            <p><strong>LOCAL:</strong> Em frente à Estátua da Engenharia</p>
+            <p><strong>DATA:</strong> <span id="meetingDate">A confirmar</span></p>
+            <p><strong>HORA:</strong> <span id="meetingTime">18:00</span></p>
+        </div>
+
+        <div class="countdown">
+            <p>Tempo até ao encontro:</p>
+            <div class="countdown-timer" id="countdown">
+                Carregando...
+            </div>
+        </div>
+
+        <div class="warning">
+            ⚠️ Esta página será atualizada à hora do encontro. Guarda este link.<br><br>
+            
+        </div>
+
+        <div class="mission-info">
+            <h2>🎯 PRÓXIMOS PASSOS</h2>
+            <p>
+                1. ✓ Completaste a Fase 1 com sucesso<br>
+                2. 📅 Aguarda pela data da Fase 2<br>
+                3. 📍 Aparece no local indicado à hora certa<br>
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>HackerSchool Recruitment System v2.7</p>
+            <p>Mantém este link seguro. Não partilhes com ninguém.</p>
+        </div>
+    </div>
+
+    <script>
+        // Set meeting date (update this as needed)
+        const meetingDate = new Date('2025-11-20T18:00:00');
+        
+        document.getElementById('meetingDate').textContent = 
+            meetingDate.toLocaleDateString('pt-PT', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        
+        document.getElementById('meetingTime').textContent = 
+            meetingDate.toLocaleTimeString('pt-PT', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = meetingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').textContent = 
+                    "O encontro já aconteceu! Contacta-nos se perdeste.";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Matrix rain effect (optional, for extra flair)
+        console.log('%c🎯 Bem-vindo à HackerSchool! 🎯', 
+            'color: #0f0; font-size: 20px; font-weight: bold;');
+        console.log('%cSe estás a ver isto, já sabes que somos curiosos por natureza 😉', 
+            'color: #0ff; font-size: 14px;');
+    </script>
+</body>
+</html>
+

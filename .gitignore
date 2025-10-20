@@ -1,0 +1,39 @@
+# Solution files (PRIVATE - não fazer push!)
+SOLUTION_GUIDE.md
+TEST_WALKTHROUGH.md
+
+# Development docs (opcional - podes fazer push se quiseres)
+# SETUP_GUIDE.md
+# QR_CODE_INSTRUCTIONS.md
+# CHANGELOG.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node (se usares)
+node_modules/
+package-lock.json
+
+# Python (se usares)
+__pycache__/
+*.pyc
+venv/
+env/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary
+*.tmp
+.cache/
+
