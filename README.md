@@ -1,4 +1,4 @@
-# 🎯 HackerSchool - Terminal de Recrutamento
+# 🎯 HackerSchool Recruitment System - HRS
 
 <div align="center">
 
@@ -107,7 +107,7 @@ A HackerSchool é um núcleo de estudantes do Instituto Superior Técnico dedica
 
 - 🌐 [Website](https://hackerschool.dev)
 - 💻 [GitHub](https://github.com/HackerSchool)
-- 📷 [Instagram](https://instagram.com/hackerschool.ist)
+- 📷 [Instagram](https://instagram.com/hackerschool_ist)
 
 ---
 
@@ -128,4 +128,6 @@ Criado com ❤️ para encontrar os melhores talentos.
 **Pronto para o desafio? Boa sorte! 🔥**
 
 </div>
+
+
 
