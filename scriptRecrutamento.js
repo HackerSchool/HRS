@@ -744,11 +744,7 @@ IMPORTANTE:
 - Usa 'install <package-name>' para instalar
 - Os xad0w.b1ts criaram dezenas de pacotes falsos!
 - Testa diferentes combinações de letras
-- Pensa: quais as letras mais prováveis para substituir "xb"?
-  
-Boa sorte, futuro membro!
-
-- HackerSchool Admin Team`;
+- Pensa: quais as letras mais prováveis para substituir "xb"?`;
     
     terminal.echo(`[[;#888;]A tentar desencriptar ficheiro...]`);
     await new Promise(r => setTimeout(r, 700));
