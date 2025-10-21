@@ -39,21 +39,25 @@ function cd(args) {
         return;
     }
     if (paths.parsedPath instanceof CustomFile) 
-        return "Não é um diretório";
-    if (!args.path)
-        return "eheheeheheh";
+        return "cd: '" + args.path_not_parsed + "': Não é um diretório";
+    if (!args.path || !paths.parsedPath)
+        return "cd: '" + args.path_not_parsed + "': Diretório não encontrado";
     paths.currentPath = args.path;
     paths.currentDir = paths.parsedPath;
     return "";
 }
 
 function cat(args) {
+    // Se o path é vazio, o ficheiro não existe
+    if (!args.path || args.path === "")
+        return "cat: '" + args.path_not_parsed + "': Ficheiro não encontrado";
+    
     if (paths.parsedPath instanceof CustomFile)
         return paths.parsedPath;
-    else if (!paths.parsedPath)
-        return "Ficheiro não encontrado";
+    else if (!paths.parsedPath || paths.parsedPath === null)
+        return "cat: '" + args.path_not_parsed + "': Ficheiro não encontrado";
     else
-        return "cat: '" + args.str_to_find + "': É uma pasta";
+        return "cat: '" + args.path_not_parsed + "': É uma pasta";
 }
 
 

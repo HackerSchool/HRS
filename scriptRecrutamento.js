@@ -26,8 +26,8 @@ let networkState = {
     ],
     isConnected: false,
     isLoggedIn: false,
-    correctUsername: 'hackerschool',
-    correctPassword: 'tooeaz4me',
+    _auth_u: 'hackerschool',
+    _auth_p: 'tooeaz4me',
     hintsUnlocked: []
 };
 
@@ -549,10 +549,10 @@ async function loginNetwork(command, terminal) {
         return;
     }
     
-    const username = parts[1].toLowerCase();
-    const password = parts[2].toLowerCase();
+    const _u_inp = parts[1].toLowerCase();
+    const _p_inp = parts[2].toLowerCase();
     
-    if (username !== networkState.correctUsername || password !== networkState.correctPassword) {
+    if (_u_inp !== networkState._auth_u || _p_inp !== networkState._auth_p) {
         terminal.echo(`[[;#888;]A validar credenciais...]`);
         await new Promise(r => setTimeout(r, 700));
         terminal.echo(`[[;#888;]A verificar username...]`);
@@ -565,8 +565,7 @@ async function loginNetwork(command, terminal) {
 ╚══════════════════════════════════════════╝
 ]`);
         terminal.echo(`[[;#EF2929;]✗ Credenciais inválidas.]`);
-        terminal.echo(`[[;#888888;]   Username: ${username !== networkState.correctUsername ? 'INCORRETO' : 'CORRETO'}]`);
-        terminal.echo(`[[;#888888;]   Password: ${password !== networkState.correctPassword ? 'INCORRETO' : 'CORRETO'}]`);
+        
         terminal.echo(`\n[[;#3465A4;]💡 As credenciais estão num ficheiro especial...]`);
         terminal.echo(`[[;#888888;]   Precisas de VER melhor... 👁️]`);
         return;
@@ -611,7 +610,7 @@ async function loginNetwork(command, terminal) {
     terminal.echo(`[[;#0ff;]   BEM-VINDO À REDE INTERNA DA HACKERSCHOOL   ]`);
     terminal.echo(`[[;#0ff;]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]`);
 
-    terminal.echo(`\n[[;#8AE234;]✓ Acesso concedido ao recruta: ${username}]`);
+    terminal.echo(`\n[[;#8AE234;]✓ Acesso concedido.]`);
     terminal.echo(`[[;#8AE234;]✓ Nova pasta montada: 'hackerschool_net']`);
 
     terminal.echo(`\n[[;#FCE94F;]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]`);
@@ -629,12 +628,12 @@ async function unlockFile(command, terminal) {
     
     if (parts.length < 3) {
         terminal.echo(`[[;#FCE94F;]Uso: unlock <filename> <password>]
-[[;#888;]Exemplo: unlock .access_instructions.txt st@llm4n]`);
+[[;#888;]Exemplo: unlock .access_instructions.txt senha123]`);
         return;
     }
     
     const filename = parts[1];
-    const password = parts[2];
+    const _p_inp = parts[2];
     
     // Build the correct path
     let targetPath = filename;
@@ -673,7 +672,10 @@ async function unlockFile(command, terminal) {
         return;
     }
     
-    if (password !== 'st@llm4n') {
+    // Ofuscação: decode da senha correta
+    const _unlock_k = String.fromCharCode(115,116,64,108,108,109,52,110);
+    
+    if (_p_inp !== _unlock_k) {
         terminal.echo(`[[;#888;]A tentar desencriptar...]`);
         await new Promise(r => setTimeout(r, 700));
         terminal.echo(`[[;#888;]A validar password...]`);
@@ -685,7 +687,7 @@ async function unlockFile(command, terminal) {
 ]`);
         await new Promise(r => setTimeout(r, 500));
         terminal.echo(`[[;#EF2929;]✗ Falha na desencriptação.]`);
-        terminal.echo(`[[;#888888;]   Password fornecida: ${password}]`);
+        
         terminal.echo(`[[;#888888;]   Status: INVÁLIDA]`);
         terminal.echo(`\n[[;#3465A4;]💡 Procura a password nos outros ficheiros...]`);
         terminal.echo(`[[;#888888;]   Algo relacionado com o fundador do Free Software]`);
@@ -704,7 +706,6 @@ Para: Recrutas
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-✓ PASSWORD CORRECTA: st@llm4n
 ✓ Ficheiro desencriptado com sucesso!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
