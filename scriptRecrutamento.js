@@ -256,7 +256,7 @@ ERRO CRÍTICO: Código malicioso detectado!
         const fakeIP = generateFakeIP();
         terminal.echo(`[[;#FF0000;]xad0w.b1ts: Estás a divertir-te? 😂]`);
         await new Promise(r => setTimeout(r, 1200));
-        terminal.echo(`[[;#FF0000;]xad0w.b1ts: Não vais ir longe, estamos a observar-te.]`);
+        terminal.echo(`[[;#FF0000;]xad0w.b1ts: Não vais longe, estamos a observar-te.]`);
         await new Promise(r => setTimeout(r, 1200));
         terminal.echo(`[[;#FF0000;]xad0w.b1ts: O teu IP é ${fakeIP}, Lisboa, Portugal]`);
         await new Promise(r => setTimeout(r, 1200));
@@ -298,7 +298,7 @@ ERRO CRÍTICO: Código malicioso detectado!
         await new Promise(r => setTimeout(r, 700));
         terminal.echo(`[[;#888;][FIREWALL] A bloquear tráfego suspeito...]`);
         await new Promise(r => setTimeout(r, 700));
-        terminal.echo(`[[;#888;][ANTIVIRUS] A escanear ficheiros...]`);
+        terminal.echo(`[[;#888;][ANTIVIRUS] A scanear ficheiros...]`);
         await new Promise(r => setTimeout(r, 800));
         
         // Progress bar animation

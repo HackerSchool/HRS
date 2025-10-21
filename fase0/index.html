@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackerSchool - ???</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: white;
+            overflow-x: hidden;
+            transition: background 1s ease;
+        }
+
+        /* FASE 1: Página Branca Normal */
+        #white-page {
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            transition: opacity 1s ease;
+        }
+
+        #white-page.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .hint-text {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 1px;
+        }
+
+        /* Botão Secreto Camuflado */
+        .secret-button {
+            background: white;
+            color: white;
+            border: 1px solid white;
+            padding: 4px 10px;
+            font-size: 13px;
+            cursor: default;
+            border-radius: 3px;
+            transition: all 0.5s ease;
+            font-family: 'Courier New', monospace;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-top: 20px;
+            align-self: flex-start;
+            margin-left: 15%;
+        }
+
+        .secret-button:hover {
+            background: #000;
+            color: #0f0;
+            border-color: #0f0;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            cursor: pointer;
+            animation: glitch 0.3s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: skew(0deg); }
+            25% { transform: skew(2deg); }
+            50% { transform: skew(-2deg); }
+            75% { transform: skew(1deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        /* FASE 2: Página Hacker Matrix */
+        #hacker-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: none;
+            z-index: 1000;
+            opacity: 0;
+        }
+
+        #hacker-page.active {
+            display: block;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        #matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hacker-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hacker-title {
+            font-size: 60px;
+            color: #0f0;
+            text-shadow: 0 0 20px #0f0;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: glitchIn 2s forwards 1s;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        @keyframes glitchIn {
+            0% { opacity: 0; transform: translateY(-50px); }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .terminal-box {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 700px;
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.3);
+            opacity: 0;
+            animation: slideUp 1s forwards 2s;
+        }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .typing-text {
+            font-size: 20px;
+            color: #0f0;
+            text-align: left;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .cursor-blink {
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .link-reveal {
+            margin-top: 20px;
+            opacity: 0;
+        }
+
+        .link-reveal.show {
+            animation: linkFadeIn 2s forwards;
+        }
+
+        @keyframes linkFadeIn {
+            0% { opacity: 0; filter: blur(10px); }
+            100% { opacity: 1; filter: blur(0); }
+        }
+
+        .hacker-link {
+            display: inline-block;
+            padding: 20px 50px;
+            background: transparent;
+            border: 3px solid #0f0;
+            color: #0f0;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hacker-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #0f0;
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .hacker-link:hover::before {
+            left: 0;
+        }
+
+        .hacker-link:hover {
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .command-line {
+            color: #0f0;
+            font-size: 18px;
+            margin: 5px 0;
+            opacity: 0;
+        }
+
+        .command-line.show {
+            animation: commandIn 0.5s forwards;
+        }
+
+        @keyframes commandIn {
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .hacker-title {
+                font-size: 40px;
+            }
+            .video-container iframe {
+                height: 300px;
+            }
+            .hacker-link {
+                font-size: 18px;
+                padding: 15px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- FASE 1: Página Branca com Vídeo -->
+    <div id="white-page">
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/nHmB98J3et0?si=6Ej4qhm1xm2G0KKB" 
+                title="YouTube video player" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <p class="hint-text">A pista para a próxima fase está algures nesta página.</p>
+        <button class="secret-button" id="secretBtn">Entrar</button>
+    </div>
+
+    <!-- FASE 2: Página Hacker Matrix -->
+    <div id="hacker-page">
+        <canvas id="matrix-canvas"></canvas>
+        <div class="hacker-content">
+            <div class="hacker-title">O DESAFIO COMEÇA AQUI.</div>
+            <div class="terminal-box">
+                <div class="typing-text">
+                    <div class="command-line" id="cmd1">> ACESSO CONCEDIDO...</div>
+                    <div class="command-line" id="cmd2">> INICIANDO SISTEMA HACKERSCHOOL RECRUITMENT SYSTEM...</div>
+                    <div class="command-line" id="cmd3">> DECRIPTANDO COORDENADAS...</div>
+                    <div class="command-line" id="cmd4">> FASE 1 DISPONÍVEL<span class="cursor-blink">_</span></div>
+                </div>
+                <div class="link-reveal" id="linkReveal">
+                    <a href="https://hackerschool.github.io/HRS/" class="hacker-link" target="_blank">
+                        [ INICIAR MISSÃO ]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        class Symbol {
+            constructor(x, y, fontSize, canvasHeight) {
+                this.characters = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                this.x = x;
+                this.y = y;
+                this.fontSize = fontSize;
+                this.canvasHeight = canvasHeight;
+                this.text = "";
+            }
+
+            draw(context) {
+                this.text = this.characters.charAt(
+                    Math.floor(Math.random() * this.characters.length)
+                );
+                context.textAlign = "center";
+                context.font = this.fontSize + "px monospace";
+                context.fillText(this.text, this.x * this.fontSize, this.y * this.fontSize);
+            }
+
+            update() {
+                if (this.y * this.fontSize > this.canvasHeight && Math.random() > 0.98) {
+                    this.y = 0;
+                } else {
+                    this.y += 1;
+                }
+            }
+        }
+
+        class Effect {
+            constructor(canvasWidth, canvasHeight) {
+                this.canvasWidth = canvasWidth;
+                this.canvasHeight = canvasHeight;
+                this.fontSize = 17;
+                this.columns = canvasWidth / this.fontSize;
+                this.symbols = [];
+                this.initialize();
+            }
+
+            initialize() {
+                for (let i = 0; i < this.columns; i++) {
+                    this.symbols[i] = new Symbol(i, 0, this.fontSize, this.canvasHeight);
+                }
+            }
+
+            resize(width, height) {
+                this.canvasWidth = width;
+                this.canvasHeight = height;
+                this.columns = this.canvasWidth / this.fontSize;
+                this.symbols = [];
+                this.initialize();
+            }
+        }
+
+        let matrixEffect = null;
+        let animationId = null;
+
+        function startMatrixRain() {
+            const canvas = document.getElementById('matrix-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const singleColor = "#0aff0a";
+            matrixEffect = new Effect(canvas.width, canvas.height);
+
+            let lastTime = 0;
+            const fps = 50;
+            const nextframe = 1000 / fps;
+            let timer = 0;
+
+            function animate(timeStamp) {
+                const deltaTime = timeStamp - lastTime;
+                lastTime = timeStamp;
+
+                if (timer > nextframe) {
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = singleColor;
+                    
+                    matrixEffect.symbols.forEach((symbol) => {
+                        symbol.draw(ctx);
+                        symbol.update();
+                    });
+                    timer = 0;
+                } else {
+                    timer += deltaTime;
+                }
+
+                animationId = requestAnimationFrame(animate);
+            }
+            animate(0);
+
+            window.addEventListener("resize", () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                matrixEffect.resize(canvas.width, canvas.height);
+            });
+        }
+
+        // Transition Logic
+        document.getElementById('secretBtn').addEventListener('click', function() {
+            const whitePage = document.getElementById('white-page');
+            const hackerPage = document.getElementById('hacker-page');
+            
+            // Fade out white page
+            whitePage.classList.add('hidden');
+            
+            // After fade, show hacker page with matrix
+            setTimeout(() => {
+                whitePage.style.display = 'none';
+                hackerPage.classList.add('active');
+                startMatrixRain();
+                
+                // Animate command lines
+                setTimeout(() => document.getElementById('cmd1').classList.add('show'), 500);
+                setTimeout(() => document.getElementById('cmd2').classList.add('show'), 1500);
+                setTimeout(() => document.getElementById('cmd3').classList.add('show'), 2500);
+                setTimeout(() => document.getElementById('cmd4').classList.add('show'), 3500);
+                setTimeout(() => document.getElementById('linkReveal').classList.add('show'), 4500);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
