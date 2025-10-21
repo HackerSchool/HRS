@@ -20,6 +20,19 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
@@ -30,6 +43,8 @@
             padding: 40px;
             box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
             animation: glowPulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes glowPulse {
@@ -139,32 +154,105 @@
         .logo {
             text-align: center;
             margin: 20px 0;
-            font-size: 1.5em;
-            color: #0ff;
-            text-shadow: 0 0 10px #0ff;
         }
 
-        @media (max-width: 600px) {
+        .logo img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        .logo-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                align-items: flex-start;
+                padding-top: 40px;
+            }
+
             .container {
                 padding: 20px;
+                max-width: 95%;
+                margin: 20px auto;
             }
             
             h1 {
                 font-size: 1.8em;
             }
+
+            .logo img {
+                max-width: 300px;
+            }
+
+            .logo-mobile {
+                display: none;
+            }
             
             .mission-info p {
                 font-size: 0.9em;
+                line-height: 1.6;
+            }
+
+            .mission-info h2 {
+                font-size: 1.2em;
+            }
+
+            .location-box p {
+                font-size: 1em;
+            }
+
+            .countdown-timer {
+                font-size: 1.5em;
+            }
+
+            .checkmark {
+                font-size: 3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 20px;
+            }
+
+            .container {
+                padding: 15px;
+                margin: 10px auto;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .logo img {
+                max-width: 250px;
+            }
+
+            .mission-info {
+                padding: 15px;
+            }
+
+            .location-box {
+                padding: 15px;
+            }
+
+            .countdown {
+                font-size: 1em;
+            }
+
+            .countdown-timer {
+                font-size: 1.3em;
             }
         }
     </style>
 </head>
 <body>
+    <canvas id="fireworks-canvas"></canvas>
     <div class="container">
         <div class="logo">
-            ╔══════════════════════════════════════╗<br>
-            ║        🎯  HACKERSCHOOL  🎯          ║<br>
-            ╚══════════════════════════════════════╝
+            <img src="logo.svg" alt="HackerSchool Logo">
         </div>
 
         <h1>🎉 PARABÉNS, RECRUTA! 🎉</h1>
@@ -269,6 +357,168 @@
             'color: #0f0; font-size: 20px; font-weight: bold;');
         console.log('%cSe estás a ver isto, já sabes que somos curiosos por natureza 😉', 
             'color: #0ff; font-size: 14px;');
+
+        // ========== FIREWORKS ANIMATION ==========
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.velocity = {
+                    x: (Math.random() - 0.5) * 8,
+                    y: (Math.random() - 0.5) * 8
+                };
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
+                this.size = Math.random() * 3 + 2;
+            }
+
+            update() {
+                this.velocity.y += 0.1; // gravity
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= this.decay;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        class Firework {
+            constructor() {
+                // Start from bottom center area
+                this.x = canvas.width * 0.4 + Math.random() * canvas.width * 0.2;
+                this.y = canvas.height;
+                
+                // Target spreads out to sides and upward - inclinação >45º
+                const spreadDirection = Math.random() - 0.5; // -0.5 to 0.5
+                this.targetX = canvas.width * 0.5 + spreadDirection * canvas.width * 0.8;
+                this.targetY = Math.random() * canvas.height * 0.25; // Explode only in top 25%
+                
+                this.exploded = false;
+                this.particles = [];
+                this.distanceTraveled = 0;
+                
+                // Calculate distance to target
+                const dx = this.targetX - this.x;
+                const dy = this.targetY - this.y;
+                this.totalDistance = Math.sqrt(dx * dx + dy * dy);
+                this.velocityX = (dx / this.totalDistance) * 6;
+                this.velocityY = (dy / this.totalDistance) * 6;
+                
+                // Random bright colors
+                const colors = [
+                    '#ff0000', '#00ff00', '#0000ff', '#ffff00', 
+                    '#ff00ff', '#00ffff', '#ff6600', '#ff0099',
+                    '#00ff99', '#9900ff', '#ff9900', '#00ccff'
+                ];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                if (!this.exploded) {
+                    this.x += this.velocityX;
+                    this.y += this.velocityY;
+                    
+                    const dx = this.targetX - this.x;
+                    const dy = this.targetY - this.y;
+                    this.distanceTraveled += Math.sqrt(this.velocityX * this.velocityX + this.velocityY * this.velocityY);
+                    
+                    // Explode when close to target or traveled enough distance
+                    if (this.distanceTraveled >= this.totalDistance * 0.9) {
+                        this.explode();
+                    }
+                }
+
+                for (let i = this.particles.length - 1; i >= 0; i--) {
+                    this.particles[i].update();
+                    if (this.particles[i].alpha <= 0) {
+                        this.particles.splice(i, 1);
+                    }
+                }
+            }
+
+            explode() {
+                this.exploded = true;
+                const particleCount = Math.random() * 50 + 50;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    this.particles.push(new Particle(this.x, this.y, this.color));
+                }
+            }
+
+            draw() {
+                if (!this.exploded) {
+                    // Draw the rocket trail
+                    ctx.save();
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Draw sparkle trail
+                    ctx.globalAlpha = 0.6;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y + 5, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                this.particles.forEach(particle => particle.draw());
+            }
+
+            isDead() {
+                return this.exploded && this.particles.length === 0;
+            }
+        }
+
+        let fireworks = [];
+        let lastFireworkTime = 0;
+
+        function animate(currentTime) {
+            ctx.fillStyle = 'rgba(26, 26, 46, 0.15)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Launch new fireworks randomly
+            if (currentTime - lastFireworkTime > Math.random() * 800 + 400) {
+                fireworks.push(new Firework());
+                lastFireworkTime = currentTime;
+            }
+
+            // Update and draw fireworks
+            for (let i = fireworks.length - 1; i >= 0; i--) {
+                fireworks[i].update();
+                fireworks[i].draw();
+                
+                if (fireworks[i].isDead()) {
+                    fireworks.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate(0);
     </script>
 </body>
 </html>

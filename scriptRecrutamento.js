@@ -57,6 +57,56 @@ async function animateProgressBar(terminal, text, duration = 1000) {
 }
 
 
+// Boot animation
+async function bootSequence(terminal) {
+    terminal.pause();
+    terminal.set_prompt('');
+    
+    const bootLines = [
+        { text: '> Inicializando sistema', dots: 35 },
+        { text: '> A carregar módulos de segurança', dots: 27 },
+        { text: '> A verificar integridade do sistema', dots: 24 },
+        { text: '> Sistema operacional pronto', dots: 32 }
+    ];
+    
+    for (const line of bootLines) {
+        terminal.echo(`[[;#888;]${line.text}]`, { exec: false });
+        
+        // Animate dots
+        for (let i = 0; i < line.dots; i++) {
+            await new Promise(r => setTimeout(r, 20));
+            terminal.update(-1, `[[;#888;]${line.text}${'.'.repeat(i + 1)}]`);
+        }
+        
+        await new Promise(r => setTimeout(r, 100));
+        terminal.update(-1, `[[;#888;]${line.text}${'.'.repeat(line.dots)} [[;#0f0;]OK]]`);
+        await new Promise(r => setTimeout(r, 200));
+    }
+    
+    terminal.echo('\n[[;#0f0;]╔═════════════════════════════════════════╗]');
+    terminal.echo('[[;#0f0;]║     HACKERSCHOOL RECRUITMENT SYSTEM     ║]');
+    terminal.echo('[[;#0f0;]║              Version 2.7                ║]');
+    terminal.echo('[[;#0f0;]╚═════════════════════════════════════════╝]\n');
+    
+    await new Promise(r => setTimeout(r, 500));
+    
+    terminal.echo('[[;#0f0;]HACKERSAUDAÇÕES!]\n');
+    terminal.echo('Muito bem, recruta! Conseguiste desbloquear a fase 1. Assim damos-te as boas vindas ao início da jornada.\n');
+    
+    terminal.echo('Para passares à próxima fase, tudo que precisas está nesta página,');
+    terminal.echo('que é um emulador de terminal UNIX (um pouco limitado!).\n');
+    terminal.echo('Lembra-te que a internet e agora o chatgpt estão sempre prontos para te ajudar.\n');
+    terminal.echo('O ls é um comando que serve para mostrar que ficheiros e pastas');
+    terminal.echo('estão num certo local do computador.');
+    terminal.echo('Experimenta escrever ls e apertar enter a ver o que acontece!\n');
+    terminal.echo('[[;#FCE94F;]⚠️  AVISO DE SEGURANÇA: Detetámos actividade suspeita do grupo xad0w.b1ts no sistema.]');
+    terminal.echo('[[;#888888;]   Alguns ficheiros podem ter sido comprometidos. Procede com cautela...]\n'); 
+    terminal.echo('[[;#888;]💻 Para melhor experiência, abre o terminal num computador]\n');
+    
+    terminal.set_prompt(getPrompt());
+    terminal.resume();
+}
+
 // Initialize the terminal
 $('#terminal').terminal(async function (command) {
     
@@ -73,6 +123,7 @@ $('#terminal').terminal(async function (command) {
             output = cd(argumentos)
             if(output)
                 this.echo(output);
+            this.set_prompt(getPrompt());
             break;
         case 'cat':
             this.echo(cat(argumentos));
@@ -107,27 +158,24 @@ $('#terminal').terminal(async function (command) {
             this.echo('Comando não reconhecido. Digite "help" para ver comandos disponíveis.');
     }
 }, {
-    greetings: 'Muito bem, recruta! Conseguiste desbloquear a fase 1. Assim damos-te as boas vindas ao início da jornada.\n\n\
-Para passares à próxima fase, tudo que precisas está nesta página, que é um emulador de terminal UNIX (um pouco limitado!). \n\
-Lembra-te que a internet e agora o chatgpt estão sempre prontos para te ajudar. \n\n\
-O ls é um comando que serve para mostrar que ficheiros e pastas estão num certo local do computador. \n\
-Assim, a primeira pista é de borla: experimenta escrever ls e apertar enter a ver o que acontece!\n\n\
-[[;#FCE94F;]⚠️  AVISO DE SEGURANÇA: Detectámos actividade suspeita do grupo xad0w.b1ts no sistema.]\n\
-[[;#888888;]   Alguns ficheiros podem ter sido comprometidos. Procede com cautela...]\n',
+    greetings: false,
     prompt: getPrompt,   
     name: 'HackerSchool',
-    promptExit: false
+    promptExit: false,
+    onInit: async function(terminal) {
+        await bootSequence(terminal);
+    }
 });
 
 // Help function
 function showHelp() {
-    return `[[;#0ff;]
+    return `[[;#0f0;]
 ╔══════════════════════════════════════════════════╗
 ║              COMANDOS DISPONÍVEIS                ║
 ╚══════════════════════════════════════════════════╝
 ]
 
-[[;#8AE234;]COMANDOS BÁSICOS:]
+[[;#0f0;]COMANDOS BÁSICOS:]
   [[;#3465A4;]ls [path]]              Lista ficheiros e pastas
   [[;#3465A4;]ls -a [path]]           Lista ficheiros incluindo escondidos (.)
   [[;#3465A4;]cd [path]]              Muda de diretório
@@ -145,17 +193,14 @@ function showHelp() {
 
 [[;#888;]EXEMPLOS:]
   $ ls
-  $ cd xad0w.b1ts
-  $ cat hackerschool.txt
   $ ls -a
-  $ grep "password" hackerschool.txt
-  $ cat cegueira.txt
-  $ unlock .access_instructions.txt st@llm4n
-  $ install hs-secure-browser
+  $ cd <pasta>
+  $ cat <ficheiro>
+  $ grep "<texto>" <ficheiro>
 
-[[;#0ff;]DICA:] Ficheiros que começam com '.' estão escondidos!
-[[;#0ff;]      Use 'ls -a' para vê-los.
-[[;#0ff;]DICA 2:] Alguns ficheiros podem conter informação escondida!
+[[;#0f0;]DICA:] Ficheiros que começam com '.' estão escondidos!
+[[;#0f0;]      Use 'ls -a' para vê-los.
+[[;#0f0;]DICA 2:] Alguns ficheiros podem conter informação escondida!
 ]`;
 }
 
@@ -318,9 +363,9 @@ ERRO CRÍTICO: Código malicioso detectado!
         await new Promise(r => setTimeout(r, 800));
         
         terminal.echo(`[[;#0ff;]
-╔══════════════════════════════════════════╗
-║    ✓ SISTEMA SEGURO NOVAMENTE ✓         ║
-╚══════════════════════════════════════════╝
+╔═════════════════════════════════════╗
+║    ✓ SISTEMA SEGURO NOVAMENTE ✓    ║
+╚═════════════════════════════════════╝
 ]`);
         await new Promise(r => setTimeout(r, 1000));
         
@@ -353,9 +398,9 @@ ERRO CRÍTICO: Código malicioso detectado!
         await new Promise(r => setTimeout(r, 800));
         
         // Agora faz os echos com segurança
-        terminal.echo('[[;#8AE234;]╔══════════════════════════════════════════╗]');
-        terminal.echo('[[;#8AE234;]║       ✓ SISTEMA REINICIADO ✓            ║]');
-        terminal.echo('[[;#8AE234;]╚══════════════════════════════════════════╝]');
+        terminal.echo('[[;#8AE234;]╔═════════════════════════════════════╗]');
+        terminal.echo('[[;#8AE234;]║         SISTEMA REINICIADO          ║]');
+        terminal.echo('[[;#8AE234;]╚═════════════════════════════════════╝]');
         await new Promise(r => setTimeout(r, 800));
         terminal.echo('');
         terminal.echo('[[;#FCE94F;]⚠️  ISSO FOI PERTO! O pacote \''+packageName+'\' era uma ARMADILHA!]');
@@ -377,9 +422,9 @@ ERRO CRÍTICO: Código malicioso detectado!
         terminal.echo('O ls é um comando que serve para mostrar que ficheiros e pastas estão num certo local do computador.');
         terminal.echo('Assim, a primeira pista é de borla: experimenta escrever ls e apertar enter a ver o que acontece!');
         terminal.echo('');
-        terminal.echo('[[;#FCE94F;]⚠️  AVISO DE SEGURANÇA: Detectámos actividade suspeita do grupo xad0w.b1ts no sistema.]');
-        terminal.echo('[[;#888888;]   Alguns ficheiros podem ter sido comprometidos. Procede com cautela...]');
-        
+        terminal.echo('[[;#FCE94F;]⚠️  AVISO DE SEGURANÇA: Detetámos actividade suspeita do grupo xad0w.b1ts no sistema.]');
+        terminal.echo('[[;#888888;]   Alguns ficheiros podem ter sido comprometidos. Procede com cautela...]\n');
+        terminal.echo('[[;#888;]💻 Para melhor experiência, abre o terminal num computador]\n');
         // CRUCIAL: Forçar update do prompt ANTES de reativar
         terminal.set_prompt(getPrompt());  // ← Força mostrar guest@hackerschool:~$
         
@@ -511,8 +556,8 @@ async function connectNetwork(terminal) {
     terminal.update(-1, '[[;#fff;]████████████████████████████████████████]');
     await new Promise(r => setTimeout(r, 150));
     terminal.update(-1, '[[;#0ff;]⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡]');
-    await new Promise(r => setTimeout(r, 150));
-    terminal.clear();
+    await new Promise(r => setTimeout(r, 300));
+    terminal.echo('');
     await new Promise(r => setTimeout(r, 300));
     
     // Box final aparece
@@ -748,6 +793,8 @@ IMPORTANTE:
     
     terminal.echo(`[[;#888;]A tentar desencriptar ficheiro...]`);
     await new Promise(r => setTimeout(r, 700));
+    /* password eheh claramente és hacker tryhard, e sinto-me na obrigação de dizer: não é isto que fazemos na hackerschool. se gostas de cyber e fazer CTFs, junta-te à STT ou a outro clube de cibersegurança. o objetivo do núcleo é sermos hackers da tecnologia overall e divertirmo-nos com as ferramentas com que o nosso século nos presenteia. fazer este terminal é o tipo de coisas que se faz por aqui. se estás ok com isso, então junta-te ao gang. lov you e espero ver-te em breve. arpg */
+
     
     // Password validation progress bar
     terminal.echo(`[[;#888;]A validar password... ]`);
@@ -773,10 +820,104 @@ IMPORTANTE:
     terminal.echo(`[[;#3465A4;]Podes agora ler o ficheiro com: cat ${filename}]`);
 }
 
+// ========== MATRIX RAIN EFFECT ==========
+(function() {
+    const canvas = document.getElementById('matrix-canvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
+    class Symbol {
+        constructor(x, y, fontSize, canvasHeight) {
+            this.characters = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            this.x = x;
+            this.y = y;
+            this.fontSize = fontSize;
+            this.canvasHeight = canvasHeight;
+            this.text = "";
+        }
 
+        draw(context) {
+            this.text = this.characters.charAt(
+                Math.floor(Math.random() * this.characters.length)
+            );
+            context.textAlign = "center";
+            context.font = this.fontSize + "px monospace";
+            context.fillText(this.text, this.x * this.fontSize, this.y * this.fontSize);
+        }
 
+        update() {
+            if (this.y * this.fontSize > this.canvasHeight && Math.random() > 0.98) {
+                this.y = 0;
+            } else {
+                this.y += 1;
+            }
+        }
+    }
 
+    class Effect {
+        constructor(canvasWidth, canvasHeight) {
+            this.canvasWidth = canvasWidth;
+            this.canvasHeight = canvasHeight;
+            this.fontSize = 17;
+            this.columns = canvasWidth / this.fontSize;
+            this.symbols = [];
+            this.initialize();
+        }
+
+        initialize() {
+            for (let i = 0; i < this.columns; i++) {
+                this.symbols[i] = new Symbol(i, 0, this.fontSize, this.canvasHeight);
+            }
+        }
+
+        resize(width, height) {
+            this.canvasWidth = width;
+            this.canvasHeight = height;
+            this.columns = this.canvasWidth / this.fontSize;
+            this.symbols = [];
+            this.initialize();
+        }
+    }
+
+    const singleColor = "#0aff0a";
+    const matrixEffect = new Effect(canvas.width, canvas.height);
+
+    let lastTime = 0;
+    const fps = 50;
+    const nextframe = 1000 / fps;
+    let timer = 0;
+
+    function animate(timeStamp) {
+        const deltaTime = timeStamp - lastTime;
+        lastTime = timeStamp;
+
+        if (timer > nextframe) {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = singleColor;
+            
+            matrixEffect.symbols.forEach((symbol) => {
+                symbol.draw(ctx);
+                symbol.update();
+            });
+            timer = 0;
+        } else {
+            timer += deltaTime;
+        }
+
+        requestAnimationFrame(animate);
+    }
+    animate(0);
+
+    window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        matrixEffect.resize(canvas.width, canvas.height);
+    });
+})();
 
 
 
