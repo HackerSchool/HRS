@@ -1,7 +1,7 @@
 // Ficheiro que tem a definição das funções comuns entre o terminal do site e do recrutamento
 
 function getPrompt() {
-    return '[[;#6dba83;]guest@hackerschool:]' + "[[;#3465A4;]" + paths.currentPath + ']$ ';
+    return '[[;#0aff0a;]guest@hackerschool:]' + "[[;#3465A4;]" + paths.currentPath + ']$ ';
   }
 
 
@@ -17,13 +17,13 @@ function ls(args) {
     for (let [key, values] of Object.entries(directory)) {
         if (values instanceof CustomFile) {
             if ( key.startsWith('.') && args && (args.opt.includes('a')) ){ 
-                output += "[[;#3465A4;#6dba83;]" + key + "]    ";  
+                output += "[[;#3465A4;#0aff0a;]" + key + "]    ";  
             }
             else if ( !key.startsWith('.'))
-                output += "[[;#3465A4;#6dba83;]" + key + "]    ";  
+                output += "[[;#3465A4;#0aff0a;]" + key + "]    ";  
         }
         else {
-            output +="[[;#6dba83;]" + key + "]    ";
+            output +="[[;#0aff0a;]" + key + "]    ";
         }
     }
 
