@@ -89,13 +89,13 @@ const freesoftware_txt = new TxtFile('Na década de 1960, um grupo de engenheiro
 const hackerschool_txt = new TxtFile('Tudo começou no Taguspark, em 2012, quando um grupo de estudantes apaixonados por tecnologia decidiu criar um espaço onde pudessem dar vida às suas ideias mais inovadoras. A HackerSchool nasceu com a missão de promover a colaboração, a experimentação e a aprendizagem prática, inspirando-se na cultura hacker que valoriza a partilha de conhecimento e o desenvolvimento de soluções criativas para os desafios do mundo real. Aqui, estudantes de diversas áreas unem forças para construir projetos incríveis, desde a internet das coisas até à inteligência artificial, utilizando tecnologias de código aberto password:st@llm4n e materiais acessíveis. A HackerSchool é mais do que um clube de tecnologia: aqui impulsiona-se uma nova geração de criadores e inovadores.');
 
 const cegueira_txt = new TxtFile(`
-⠁⠥⠞⠑⠝⠞⠊⠉⠁⠗⠀⠝⠁⠀⠗⠑⠙⠑
-⠉⠕⠍⠁⠝⠙⠕
-⠓⠎⠤⠇⠕⠛⠊⠝⠀<⠥⠎⠑⠗⠝⠁⠍⠑>⠀<⠏⠁⠎⠎⠺⠕⠗⠙>
-⠥⠎⠑⠗⠝⠁⠍⠑
-⠓⠁⠉⠅⠑⠗⠎⠉⠓⠕⠕⠇
-⠏⠁⠎⠎⠺⠕⠗⠙
-⠞⠕⠕⠑⠁⠵⠼⠙⠍⠑
+⠁⠥⠞⠑⠝⠞⠊⠉⠁⠗⠀⠝⠁⠀⠗⠑⠙⠑⠀
+⠉⠕⠍⠁⠝⠙⠕⠀
+⠓⠎⠤⠇⠕⠛⠊⠝⠀⠥⠎⠑⠗⠝⠁⠍⠑⠀⠏⠁⠎⠎⠺⠕⠗⠙
+⠥⠎⠑⠗⠝⠁⠍⠑⠀
+⠓⠁⠉⠅⠑⠗⠎⠉⠓⠕⠕⠇⠀
+⠏⠁⠎⠎⠺⠕⠗⠙⠀
+⠞⠕⠕⠑⠁⠵⠋⠕⠗⠍⠑
 `);
 
 const pista_txt = new TxtFile("Página 133");

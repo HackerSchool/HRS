@@ -27,7 +27,7 @@ let networkState = {
     isConnected: false,
     isLoggedIn: false,
     _auth_u: 'hackerschool',
-    _auth_p: 'tooeaz4me',
+    _auth_p: 'tooeazforme',
     hintsUnlocked: []
 };
 
