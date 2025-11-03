@@ -17,7 +17,7 @@ KKKKKKKKKKc;xdcodxxkkxdddodOOdollcxk.'o0KKKKKKKKKK\n\
 KKKKKKKKKKk.xkdooxkkkkOkxdxOKOOOO00xcOKKKKKKKKKKKK\n\
 KKKKKKKKKKKl.'loddxkkOOkoodkkO00KK00KKKKKKKKKKKKKK\n\
 000000000000l.:odxxxddol:codoxOO000000000000000000\n\
-0000000000000'clodxdddooodxxoodx-9.O10307504090000\n\
+0000000000000'clodxdddooodxxoodx-9.137549000000000\n\
 0000000000000xodoooooxkkkkkkOOkkk00000000000000000\n\
 0000000000000OdxxxolloxxkOOOOOkk000000000000000000\n\
 00000000000kcO0OkkxdolloooddxkO0000000000000000000\n\
@@ -47,7 +47,7 @@ KKKK00kdlc;'''.....oddocdxxkddxxkx,...'ck0KKKKKKKK\n\
 000000Oddol;,'..... .codxddxxkxl'.....',:odO000000\n\
 000000Okdxc;,........:llooodxxdc'......;ok00000000\n\
 0000000Oklc:'.......':looodxxxxoc;,,,;cdxxxxk0O000\n\
-000000KOKOddo;,;;:-9.1oo38od0dx5kxxx8kkkkkdO0O0000\n\
+000000KOKOddo;,;;:-9.138058kkkkkdO0O00kkkxxxkk0000\n\
 0000OXXXXK0O0kxxdxxxxxdddxxxkkkkkkkkOkkkkxkkk0OXXX\n\
 000OX0kxKKK0K0kkkkkkkkkkkkkkkkkkOOOOOOOkxOkOOOd0KK\n\
 OOKKOOkOOx00OOOOOOOOOkOOOOOOOOOOOOOOOOOkxxkKO00K0X\n\
@@ -69,7 +69,7 @@ KKKKKKKKKKKKKKx::ddxddkkxc:;::cl:,:KKKKKKKKKKKKKKK\n\
 KKKKKKKKKKKKKKOc:oxkkxxdl;:::ccc;,kKKKKKKKKKKKKKKK\n\
 KKKKKKKKKKKKKKKkldkkdlc,,'',;ccclkKKKKKKKKKKKKKKKK\n\
 KKKKKKKKKKKKKKKK0odocclc:;,,,;::0KKKKKKKKKKKKKKKKK\n\
-00000000000000000Oloodoc;;;:;;-9.k0139700000000000\n\
+00000000000000000Oloodoc;;;:;;-9.13970000000000000\n\
 000000000000000000xlclol;;,,,;:O000000000000000000\n\
 00000000000000000Oxdocc:,',,;:clo00000000000000000\n\
 000000000000000Okldddddl:;;:::cc'lk000000000000000\n\
@@ -84,7 +84,7 @@ c::ccccccc:cccc::::,:;coodol:.''',,;;:;;;::;;;;;;;\
 
 // Se quiseres adicionar um ficheiro crias um objeto da classe File(descrição, formato) e depois
 // adicionas no fileSystem mais em baixo
-const freesoftware_txt = new TxtFile('Na década de 1960, um grupo de engenheiros e programadores, conhecidos como "hackers", convergiu em torno da ideia de que o compartilhamento de conhecimento e a colaboração eram essenciais para o avanço da tecnologia. Mas pode dizer-se que tudo começou quando Richard Stallman, um dos principais proponentes dessa cultura, lançou o livro "Free Software, Free Society", onde explora a importância do software livre não apenas como uma questão técnica, mas como um princípio ético que defende a liberdade e a autonomia do usuário. Neste contexto, Stallman argumenta que o software deve ser acessível a todos para que cada indivíduo possa não apenas usar, mas também estudar, modificar e distribuir programas, promovendo assim um ambiente de inovação e criatividade. A obra destaca como a cultura hacker, ao valorizar a cooperação e a troca de ideias, pode servir como um contrapeso às práticas monopolistas da indústria, garantindo que a tecnologia esteja a serviço da sociedade e não apenas de interesses comerciais.');
+const freesoftware_txt = new TxtFile('Na década de 1960, um grupo de engenheiros e programadores do MIT, conhecidos como “hackers”, reuniu-se em torno da ideia de que o compartilhamento de conhecimento e a colaboração eram fundamentais para o avanço tecnológico. Entre os defensores mais influentes dessa visão destacou-se Richard Stallman, cuja atuação foi decisiva para transformar o software livre num movimento ético e social, e não apenas técnico. Stallman defendeu que o software deve ser acessível a todos, permitindo que qualquer pessoa possa utilizá-lo, estudá-lo, modificá-lo e redistribuí-lo. Essa postura consolidou a noção de liberdade digital como pilar da inovação e da criatividade, reforçando a importância da cooperação e da partilha de ideias como formas de opor o poder das grandes indústrias e assegurar que a tecnologia sirva ao bem comum. As fotos escondem a verdadeira identidade.');
 
 const hackerschool_txt = new TxtFile('Tudo começou no Taguspark, em 2012, quando um grupo de estudantes apaixonados por tecnologia decidiu criar um espaço onde pudessem dar vida às suas ideias mais inovadoras. A HackerSchool nasceu com a missão de promover a colaboração, a experimentação e a aprendizagem prática, inspirando-se na cultura hacker que valoriza a partilha de conhecimento e o desenvolvimento de soluções criativas para os desafios do mundo real. Aqui, estudantes de diversas áreas unem forças para construir projetos incríveis, desde a internet das coisas até à inteligência artificial, utilizando tecnologias de código aberto password:st@llm4n e materiais acessíveis. A HackerSchool é mais do que um clube de tecnologia: aqui impulsiona-se uma nova geração de criadores e inovadores.');
 
@@ -100,7 +100,7 @@ const cegueira_txt = new TxtFile(`
 
 const pista_txt = new TxtFile("Página 133");
 
-const enigma_txt = new TxtFile("Onde tudo começou, \nEncontra a chave que procuras, rodeada, \nE tudo começará para ti.");
+const enigma_txt = new TxtFile("Procura pela ajuda, \nE virá até ti.");
 
 const acontecimentos_suspeitos_txt = new TxtFile("Suspeita-se que a xad0w.b1ts esteja por trás de alguns acontecimentos dos últimos tempos, como:\n\n\n\
 \t- Aumento dos preços no Social\n\
@@ -317,7 +317,7 @@ A analisar assinatura digital...
 A verificar checksums...
 A comparar com backups...
 
-38.7370, -9.1382
+38.737594, -9.138462
 
 
 [SCAN: 73% completo]

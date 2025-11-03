@@ -99,6 +99,7 @@ async function bootSequence(terminal) {
     terminal.echo('O ls é um comando que serve para mostrar que ficheiros e pastas');
     terminal.echo('estão num certo local do computador.');
     terminal.echo('Experimenta escrever ls e apertar enter a ver o que acontece!\n');
+    terminal.echo('Caso precises de mais ajuda, podes usar o comando help no terminal. \n');
     terminal.echo('[[;#FCE94F;]⚠️  AVISO DE SEGURANÇA: Detetámos actividade suspeita do grupo xad0w.b1ts no sistema.]');
     terminal.echo('[[;#888888;]   Alguns ficheiros podem ter sido comprometidos. Procede com cautela...]\n'); 
     terminal.echo('[[;#888;]💻 Para melhor experiência, abre o terminal num computador]\n');
@@ -201,6 +202,8 @@ function showHelp() {
 [[;#0f0;]DICA:] Ficheiros que começam com '.' estão escondidos!
 [[;#0f0;]      Use 'ls -a' para vê-los.
 [[;#0f0;]DICA 2:] Alguns ficheiros podem conter informação escondida!
+
+Se mesmo assim ainda te sentires perdido, recomendamos o livro "The art of UNIX programming" por Eric Steven Raymond. \nNão, a sério, devias mesmo ir ver.
 ]`;
 }
 
@@ -413,17 +416,18 @@ ERRO CRÍTICO: Código malicioso detectado!
         terminal.echo('');
         terminal.echo('[[;#888;]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]');
         await new Promise(r => setTimeout(r, 500));
-        terminal.echo('');
-        terminal.echo('Muito bem, recruta! Conseguiste desbloquear a fase 1. Assim damos-te as boas vindas ao início da jornada.');
-        terminal.echo('');
-        terminal.echo('Para passares à próxima fase, tudo que precisas está nesta página, que é um emulador de terminal UNIX (um pouco limitado!).');
-        terminal.echo('Lembra-te que a internet e agora o chatgpt estão sempre prontos para te ajudar.');
-        terminal.echo('');
-        terminal.echo('O ls é um comando que serve para mostrar que ficheiros e pastas estão num certo local do computador.');
-        terminal.echo('Assim, a primeira pista é de borla: experimenta escrever ls e apertar enter a ver o que acontece!');
-        terminal.echo('');
+        terminal.echo('[[;#0f0;]HACKERSAUDAÇÕES!]\n');
+        terminal.echo('Muito bem, recruta! Conseguiste desbloquear a fase 1. Assim damos-te as boas vindas ao início da jornada.\n');
+        
+        terminal.echo('Para passares à próxima fase, tudo que precisas está nesta página,');
+        terminal.echo('que é um emulador de terminal UNIX (um pouco limitado!).\n');
+        terminal.echo('Lembra-te que a internet e agora o chatgpt estão sempre prontos para te ajudar.\n');
+        terminal.echo('O ls é um comando que serve para mostrar que ficheiros e pastas');
+        terminal.echo('estão num certo local do computador.');
+        terminal.echo('Experimenta escrever ls e apertar enter a ver o que acontece!\n');
+        terminal.echo('Caso precises de mais ajuda, podes usar o comando help no terminal. \n');
         terminal.echo('[[;#FCE94F;]⚠️  AVISO DE SEGURANÇA: Detetámos actividade suspeita do grupo xad0w.b1ts no sistema.]');
-        terminal.echo('[[;#888888;]   Alguns ficheiros podem ter sido comprometidos. Procede com cautela...]\n');
+        terminal.echo('[[;#888888;]   Alguns ficheiros podem ter sido comprometidos. Procede com cautela...]\n'); 
         terminal.echo('[[;#888;]💻 Para melhor experiência, abre o terminal num computador]\n');
         // CRUCIAL: Forçar update do prompt ANTES de reativar
         terminal.set_prompt(getPrompt());  // ← Força mostrar guest@hackerschool:~$
