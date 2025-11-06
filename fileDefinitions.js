@@ -1,4 +1,4 @@
-// Ficheiro para as as definições dos diretórios, ficheiros, descrições dos ficheiros
+// Ficheiro para as as definições das pastas, ficheiros, descrições dos ficheiros
 
 // Fotos ainda não estão em nenhuma base de dados por isso têm de ser definidas aqui :(
 agente008 = "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\n\
@@ -115,7 +115,7 @@ const acontecimentos_suspeitos_txt = new TxtFile("Suspeita-se que a xad0w.b1ts e
 \t- A queda do Império Romano Bizentino\n\
 \t- A ilha das cores é cancelada\n");
 
-const _cheats_txt = new TxtFile("Crazy, no técnico há sítios onde se guardam livros");
+const _cheats_txt = new TxtFile("Página 133");
 
 const hs_access_instructions_locked = `[COMUNICAÇÃO INTERNA - HackerSchool]
 [🔒 PROTEGIDO POR PASSWORD]
@@ -338,7 +338,7 @@ A verificar checksums...
 `);
 
 const hs_hints_txt = new TxtFile(`
-Página 133
+Quantas fotos existem?
 `);
 
 const hs_decoy_txt = new TxtFile(`

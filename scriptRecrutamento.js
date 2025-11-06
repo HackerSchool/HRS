@@ -179,8 +179,8 @@ function showHelp() {
 [[;#0f0;]COMANDOS BÁSICOS:]
   [[;#3465A4;]ls [path]]              Lista ficheiros e pastas
   [[;#3465A4;]ls -a [path]]           Lista ficheiros incluindo escondidos (.)
-  [[;#3465A4;]cd [path]]              Muda de diretório
-  [[;#3465A4;]pwd]                    Mostra diretório atual
+  [[;#3465A4;]cd [path]]              Muda de pasta
+  [[;#3465A4;]pwd]                    Mostra pasta atual
   [[;#3465A4;]cat <file>]             Mostra conteúdo de um ficheiro
   [[;#3465A4;]grep <text> <file>]     Procura texto num ficheiro
   [[;#3465A4;]grep -r <text> [path]]  Procura recursivamente
@@ -195,15 +195,15 @@ function showHelp() {
 [[;#888;]EXEMPLOS:]
   $ ls
   $ ls -a
-  $ cd <pasta>
-  $ cat <ficheiro>
-  $ grep "<texto>" <ficheiro>
+  $ cd pasta_qualquer
+  $ cat ficheiro1.txt
+  $ grep "password" ficheiro2.txt
 
 [[;#0f0;]DICA:] Ficheiros que começam com '.' estão escondidos!
-[[;#0f0;]      Use 'ls -a' para vê-los.
+[[;#0f0;]      Usa 'ls -a' para vê-los.
 [[;#0f0;]DICA 2:] Alguns ficheiros podem conter informação escondida!
 
-Se mesmo assim ainda te sentires perdido, recomendamos o livro "The art of UNIX programming" por Eric Steven Raymond. \nNão, a sério, devias mesmo ir ver.
+Se mesmo assim ainda precisares de ajuda, recomendamos o livro "The art of UNIX programming" por Eric Steven Raymond. \nNão, a sério, devias mesmo ir vê-lo.
 ]`;
 }
 
@@ -645,7 +645,7 @@ async function loginNetwork(command, terminal) {
     await new Promise(r => setTimeout(r, 700));
     terminal.echo(`[[;#888;]A desencriptar ficheiros seguros...]`);
     await new Promise(r => setTimeout(r, 700));
-    terminal.echo(`[[;#888;]A montar diretório de rede...]`);
+    terminal.echo(`[[;#888;]A montar pasta de rede...]`);
     await new Promise(r => setTimeout(r, 700));
     
     terminal.echo(`[[;#8AE234;]
@@ -766,19 +766,15 @@ Para acederes à nossa rede interna, segue estes passos:
 
 1️⃣ INSTALAR PACOTES DE SEGURANÇA
    Precisas de 2 pacotes específicos:
-   • hs-sxbure-broxber (navegador seguro)
+   • hs-sxbure-broxber???? (navegador seguro)
    • nxbwork-accexb-key (chave de acesso)
    
    ⚠️  ATENÇÃO CRÍTICA: Os xad0w.b1ts infiltraram
    VÁRIOS pacotes FALSOS no sistema! 
    
-   Alguns têm nomes MUITO parecidos com os oficiais:
-   - Versões "LTS", "v2", "PRO"
-   - Palavras trocadas: "browser-secure" vs "secure-browser"
-   - Palavras similares: "token" vs "key"
-   
    💡 DICA: As letras "xb" nestes nomes representam
-   caracteres corrompidos. Substitui por letras que
+   caracteres corrompidos, e "????" são carateres em dúvida 
+   (ou seja, há incerteza se são carateres mesmo necessários). Substitui por letras que
    façam sentido! Só os pacotes OFICIAIS funcionam!
 
 2️⃣ ESTABELECER CONEXÃO
@@ -790,10 +786,7 @@ Para acederes à nossa rede interna, segue estes passos:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 IMPORTANTE:
-- Usa 'install <package-name>' para instalar
-- Os xad0w.b1ts criaram dezenas de pacotes falsos!
-- Testa diferentes combinações de letras
-- Pensa: quais as letras mais prováveis para substituir "xb"?`;
+- Usa 'install <package-name>' para instalar`;
     
     terminal.echo(`[[;#888;]A tentar desencriptar ficheiro...]`);
     await new Promise(r => setTimeout(r, 700));

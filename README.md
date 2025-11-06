@@ -36,7 +36,7 @@ Clica no link do desafio e começarás no terminal virtual.
 ### 2. Usa Comandos Unix
 ```bash
 ls              # Lista ficheiros
-cd <pasta>      # Muda de diretório
+cd <pasta>      # Muda de pasta
 cat <ficheiro>  # Mostra conteúdo
 pwd             # Mostra caminho atual
 grep <texto>    # Procura texto

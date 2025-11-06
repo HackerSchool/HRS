@@ -39,9 +39,9 @@ function cd(args) {
         return;
     }
     if (paths.parsedPath instanceof CustomFile) 
-        return "cd: '" + args.path_not_parsed + "': Não é um diretório";
+        return "cd: '" + args.path_not_parsed + "': Não é uma pasta";
     if (!args.path || !paths.parsedPath)
-        return "cd: '" + args.path_not_parsed + "': Diretório não encontrado";
+        return "cd: '" + args.path_not_parsed + "': Pasta não encontrada";
     paths.currentPath = args.path;
     paths.currentDir = paths.parsedPath;
     return "";

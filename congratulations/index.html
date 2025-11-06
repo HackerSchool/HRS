@@ -2,7 +2,8 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Parabéns! - HackerSchool</title>
     <style>
         * {
@@ -16,6 +17,7 @@
             font-family: 'Courier New', monospace;
             color: #0f0;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,6 +25,201 @@
             position: relative;
             overflow-x: hidden;
             overflow-y: auto;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        /* SECRET WARNING PAGE */
+        #secret-warning-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            width: 100dvw;
+            height: 100vh;
+            height: 100dvh;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #secret-warning-page.hidden {
+            display: none;
+        }
+
+        #warning-matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        .warning-container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            border: 3px solid #f00;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+            position: relative;
+            z-index: 10;
+            animation: warningPulse 2s ease-in-out infinite;
+            margin: auto;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { 
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+                border-color: #f00;
+            }
+            50% { 
+                box-shadow: 0 0 80px rgba(255, 0, 0, 0.8);
+                border-color: #ff3333;
+            }
+        }
+
+        .warning-title {
+            font-size: 2.5em;
+            color: #f00;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #f00;
+            animation: glitchText 3s infinite;
+        }
+
+        @keyframes glitchText {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        .warning-message {
+            color: #ff9999;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .warning-message strong {
+            color: #ff3333;
+            font-size: 1.1em;
+        }
+
+        .safe-checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #0f0;
+            border-radius: 5px;
+            min-height: 60px;
+            -webkit-tap-highlight-color: rgba(0, 255, 0, 0.2);
+        }
+
+        .safe-checkbox {
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            min-height: 28px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #0f0;
+            filter: drop-shadow(0 0 5px #0f0);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .safe-checkbox-label {
+            color: #0f0;
+            font-size: 1.3em;
+            cursor: pointer;
+            user-select: none;
+            text-shadow: 0 0 10px #0f0;
+            transition: all 0.3s ease;
+            padding: 10px;
+            margin: -10px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .safe-checkbox-label:hover {
+            color: #0ff;
+            text-shadow: 0 0 15px #0ff;
+        }
+
+        .proceed-button {
+            display: none;
+            margin: 30px auto 0;
+            padding: 18px 50px;
+            min-height: 56px;
+            min-width: 200px;
+            background: transparent;
+            border: 3px solid #0f0;
+            color: #0f0;
+            font-size: 1.2em;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            -webkit-tap-highlight-color: rgba(0, 255, 0, 0.3);
+            touch-action: manipulation;
+            user-select: none;
+        }
+
+        .proceed-button.show {
+            display: block;
+            animation: buttonPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(0, 255, 0, 0.8);
+                transform: scale(1.05);
+            }
+        }
+
+        .proceed-button:hover {
+            background: #0f0;
+            color: #000;
+            box-shadow: 0 0 50px rgba(0, 255, 0, 1);
+            transform: scale(1.1);
+        }
+
+        .proceed-button:active {
+            transform: scale(0.95);
+        }
+
+        /* CONGRATULATIONS PAGE */
+        #congratulations-page {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        #congratulations-page.show {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         #fireworks-canvas {
@@ -37,6 +234,7 @@
 
         .container {
             max-width: 800px;
+            width: 100%;
             background: rgba(0, 0, 0, 0.8);
             border: 2px solid #0f0;
             border-radius: 10px;
@@ -45,6 +243,7 @@
             animation: glowPulse 2s ease-in-out infinite;
             position: relative;
             z-index: 1;
+            margin: auto;
         }
 
         @keyframes glowPulse {
@@ -169,27 +368,95 @@
         @media (max-width: 768px) {
             body {
                 align-items: flex-start;
-                padding-top: 40px;
+                padding: 10px;
+                padding-top: env(safe-area-inset-top, 10px);
+            }
+
+            #secret-warning-page {
+                padding: 10px;
+                padding-top: max(15px, env(safe-area-inset-top));
+                padding-bottom: max(15px, env(safe-area-inset-bottom));
+            }
+
+            .warning-container {
+                padding: 25px 20px;
+                max-width: 100%;
+                margin: 10px 0;
+            }
+
+            .warning-title {
+                font-size: 1.6em;
+                margin-bottom: 20px;
+                line-height: 1.2;
+            }
+
+            .warning-message {
+                font-size: 1em;
+                line-height: 1.6;
+                margin-bottom: 25px;
+            }
+
+            .warning-message p {
+                margin-bottom: 15px;
+            }
+
+            .safe-checkbox-container {
+                margin: 25px 0;
+                padding: 18px 15px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .safe-checkbox {
+                width: 32px;
+                height: 32px;
+                min-width: 32px;
+                min-height: 32px;
+            }
+
+            .safe-checkbox-label {
+                font-size: 1.1em;
+                flex: 1;
+                min-width: 200px;
+            }
+
+            .proceed-button {
+                padding: 16px 40px;
+                font-size: 1em;
+                min-height: 52px;
+                width: 100%;
+                max-width: 300px;
+                letter-spacing: 2px;
             }
 
             .container {
-                padding: 20px;
-                max-width: 95%;
-                margin: 20px auto;
+                padding: 20px 15px;
+                max-width: 100%;
+                margin: 10px auto;
             }
             
             h1 {
-                font-size: 1.8em;
+                font-size: 1.6em;
+                line-height: 1.2;
+            }
+
+            .logo {
+                margin: 15px 0;
             }
 
             .logo img {
-                max-width: 300px;
+                max-width: 280px;
             }
 
             .logo-mobile {
                 display: none;
             }
             
+            .mission-info {
+                margin: 20px 0;
+                padding: 15px;
+            }
+
             .mission-info p {
                 font-size: 0.9em;
                 line-height: 1.6;
@@ -197,60 +464,248 @@
 
             .mission-info h2 {
                 font-size: 1.2em;
+                margin-bottom: 12px;
+            }
+
+            .location-box {
+                margin: 20px 0;
+                padding: 18px;
             }
 
             .location-box p {
-                font-size: 1em;
+                font-size: 0.95em;
+                line-height: 1.5;
+            }
+
+            .countdown {
+                margin: 20px 0;
             }
 
             .countdown-timer {
-                font-size: 1.5em;
+                font-size: 1.4em;
             }
 
             .checkmark {
-                font-size: 3em;
+                font-size: 2.5em;
+            }
+
+            /* Reduce animation intensity on mobile for better performance */
+            @keyframes warningPulse {
+                0%, 100% { 
+                    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+                }
+                50% { 
+                    box-shadow: 0 0 50px rgba(255, 0, 0, 0.6);
+                }
+            }
+
+            @keyframes glowPulse {
+                0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.2); }
+                50% { box-shadow: 0 0 35px rgba(0, 255, 0, 0.4); }
+            }
+
+            /* Reduce matrix opacity on mobile for better performance */
+            #warning-matrix-canvas {
+                opacity: 0.2;
             }
         }
 
         @media (max-width: 480px) {
             body {
-                padding-top: 20px;
+                padding: 8px;
+                padding-top: max(15px, env(safe-area-inset-top));
+                padding-bottom: max(8px, env(safe-area-inset-bottom));
+            }
+
+            #secret-warning-page {
+                padding: 8px;
+                padding-top: max(12px, env(safe-area-inset-top));
+                padding-bottom: max(12px, env(safe-area-inset-bottom));
+            }
+
+            .warning-container {
+                padding: 20px 15px;
+                border-width: 2px;
+            }
+
+            .warning-title {
+                font-size: 1.3em;
+                margin-bottom: 18px;
+            }
+
+            .warning-message {
+                font-size: 0.95em;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            .warning-message strong {
+                font-size: 1.05em;
+            }
+
+            .safe-checkbox-container {
+                margin: 20px 0;
+                padding: 15px 12px;
+            }
+
+            .safe-checkbox {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+                min-height: 28px;
+                margin-right: 12px;
+            }
+
+            .safe-checkbox-label {
+                font-size: 1em;
+                padding: 8px;
+                margin: -8px;
+            }
+
+            .proceed-button {
+                padding: 14px 30px;
+                font-size: 0.95em;
+                letter-spacing: 1.5px;
+                min-height: 50px;
+                width: 100%;
+                max-width: 280px;
             }
 
             .container {
-                padding: 15px;
-                margin: 10px auto;
+                padding: 15px 12px;
+                margin: 8px auto;
             }
 
             h1 {
-                font-size: 1.5em;
+                font-size: 1.3em;
+                margin-bottom: 15px;
+            }
+
+            .logo {
+                margin: 12px 0;
             }
 
             .logo img {
-                max-width: 250px;
+                max-width: 220px;
+            }
+
+            .success-banner {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .checkmark {
+                font-size: 2.2em;
             }
 
             .mission-info {
-                padding: 15px;
+                margin: 15px 0;
+                padding: 12px;
+            }
+
+            .mission-info h2 {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+
+            .mission-info p {
+                font-size: 0.85em;
+                line-height: 1.5;
             }
 
             .location-box {
-                padding: 15px;
+                margin: 15px 0;
+                padding: 15px 12px;
+            }
+
+            .location-box h3 {
+                font-size: 1.1em;
+                margin-bottom: 8px;
+            }
+
+            .location-box p {
+                font-size: 0.9em;
+                line-height: 1.4;
             }
 
             .countdown {
-                font-size: 1em;
+                margin: 15px 0;
+                font-size: 0.95em;
             }
 
             .countdown-timer {
-                font-size: 1.3em;
+                font-size: 1.2em;
+            }
+
+            .warning {
+                padding: 12px;
+                margin: 15px 0;
+                font-size: 0.9em;
+            }
+
+            .footer {
+                margin-top: 20px;
+                padding-top: 15px;
+                font-size: 0.85em;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 360px) {
+            .warning-title {
+                font-size: 1.1em;
+            }
+
+            .warning-message {
+                font-size: 0.9em;
+            }
+
+            .safe-checkbox-label {
+                font-size: 0.95em;
+            }
+
+            .proceed-button {
+                font-size: 0.9em;
+                padding: 12px 25px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+            }
+
+            .logo img {
+                max-width: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="fireworks-canvas"></canvas>
-    <div class="container">
+    <!-- SECRET WARNING PAGE -->
+    <div id="secret-warning-page">
+        <canvas id="warning-matrix-canvas"></canvas>
+        <div class="warning-container">
+            <h1 class="warning-title">⚠️ AVISO CRÍTICO ⚠️</h1>
+            <div class="warning-message">
+                <p><strong>Eles estão a ver-te.</strong></p>
+                <p style="margin-top: 20px;">
+                    Certifica-te que estás primeiro num lugar seguro antes de veres esta mensagem.
+                </p>
+                <p style="margin-top: 15px;">
+                    Sai da biblioteca se ainda estiveres lá.
+                </p>
+            </div>
+            <div class="safe-checkbox-container">
+                <input type="checkbox" id="safeCheckbox" class="safe-checkbox">
+                <label for="safeCheckbox" class="safe-checkbox-label">Estou num lugar seguro</label>
+            </div>
+            <button id="proceedButton" class="proceed-button">CONTINUAR</button>
+        </div>
+    </div>
+
+    <!-- CONGRATULATIONS PAGE -->
+    <div id="congratulations-page">
+        <canvas id="fireworks-canvas"></canvas>
+        <div class="container">
         <div class="logo">
             <img src="logo.svg" alt="HackerSchool Logo">
         </div>
@@ -311,6 +766,132 @@
     </div>
 
     <script>
+        // ========== SECRET WARNING PAGE LOGIC ==========
+        const warningMatrixCanvas = document.getElementById('warning-matrix-canvas');
+        const warningCtx = warningMatrixCanvas.getContext('2d');
+        warningMatrixCanvas.width = window.innerWidth;
+        warningMatrixCanvas.height = window.innerHeight;
+
+        // Matrix rain effect for warning page
+        class WarningSymbol {
+            constructor(x, y, fontSize, canvasHeight) {
+                this.characters = "01";
+                this.x = x;
+                this.y = y;
+                this.fontSize = fontSize;
+                this.canvasHeight = canvasHeight;
+                this.text = "";
+            }
+
+            draw(context) {
+                this.text = this.characters.charAt(Math.floor(Math.random() * this.characters.length));
+                context.textAlign = "center";
+                context.font = this.fontSize + "px monospace";
+                context.fillStyle = "#ff0000";
+                context.fillText(this.text, this.x * this.fontSize, this.y * this.fontSize);
+            }
+
+            update() {
+                if (this.y * this.fontSize > this.canvasHeight && Math.random() > 0.98) {
+                    this.y = 0;
+                } else {
+                    this.y += 1;
+                }
+            }
+        }
+
+        class WarningEffect {
+            constructor(canvasWidth, canvasHeight) {
+                this.canvasWidth = canvasWidth;
+                this.canvasHeight = canvasHeight;
+                // Larger font on mobile for better performance (fewer columns)
+                const isMobile = window.innerWidth <= 768;
+                this.fontSize = isMobile ? 30 : 20;
+                // Limit columns on mobile to improve performance
+                const maxColumns = isMobile ? 25 : Infinity;
+                this.columns = Math.min(canvasWidth / this.fontSize, maxColumns);
+                this.symbols = [];
+                this.initialize();
+            }
+
+            initialize() {
+                for (let i = 0; i < this.columns; i++) {
+                    this.symbols[i] = new WarningSymbol(i, Math.random() * -100, this.fontSize, this.canvasHeight);
+                }
+            }
+
+            resize(width, height) {
+                this.canvasWidth = width;
+                this.canvasHeight = height;
+                const isMobile = window.innerWidth <= 768;
+                this.fontSize = isMobile ? 30 : 20;
+                const maxColumns = isMobile ? 25 : Infinity;
+                this.columns = Math.min(this.canvasWidth / this.fontSize, maxColumns);
+                this.symbols = [];
+                this.initialize();
+            }
+        }
+
+        let warningMatrixEffect = new WarningEffect(warningMatrixCanvas.width, warningMatrixCanvas.height);
+        let warningAnimationId = null;
+        let lastFrameTime = 0;
+        const targetFPS = window.innerWidth <= 768 ? 30 : 60; // Lower FPS on mobile
+        const frameInterval = 1000 / targetFPS;
+
+        window.addEventListener('resize', () => {
+            warningMatrixCanvas.width = window.innerWidth;
+            warningMatrixCanvas.height = window.innerHeight;
+            warningMatrixEffect.resize(warningMatrixCanvas.width, warningMatrixCanvas.height);
+        });
+
+        function animateWarningMatrix(currentTime) {
+            // Throttle animation on mobile
+            if (currentTime - lastFrameTime >= frameInterval) {
+                warningCtx.fillStyle = "rgba(0, 0, 0, 0.05)";
+                warningCtx.fillRect(0, 0, warningMatrixCanvas.width, warningMatrixCanvas.height);
+                
+                warningMatrixEffect.symbols.forEach((symbol) => {
+                    symbol.draw(warningCtx);
+                    symbol.update();
+                });
+
+                lastFrameTime = currentTime;
+            }
+
+            warningAnimationId = requestAnimationFrame(animateWarningMatrix);
+        }
+
+        // Start warning matrix animation
+        animateWarningMatrix(0);
+
+        // Checkbox logic
+        const safeCheckbox = document.getElementById('safeCheckbox');
+        const proceedButton = document.getElementById('proceedButton');
+        const secretWarningPage = document.getElementById('secret-warning-page');
+        const congratulationsPage = document.getElementById('congratulations-page');
+
+        safeCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                proceedButton.classList.add('show');
+            } else {
+                proceedButton.classList.remove('show');
+            }
+        });
+
+        proceedButton.addEventListener('click', function() {
+            // Stop warning matrix animation
+            if (warningAnimationId) {
+                cancelAnimationFrame(warningAnimationId);
+            }
+            
+            // Hide warning page
+            secretWarningPage.classList.add('hidden');
+            
+            // Show congratulations page
+            congratulationsPage.classList.add('show');
+        });
+
+        // ========== CONGRATULATIONS PAGE LOGIC ==========
         // Set meeting date (update this as needed)
         const meetingDate = new Date('2025-11-20T18:00:00');
         
