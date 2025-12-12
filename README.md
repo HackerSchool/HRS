@@ -31,7 +31,7 @@ Um desafio de recrutamento imersivo onde usas comandos Unix para navegar num ter
 ## 🎯 Como Jogar
 
 ### 1. Abre o Terminal
-Clica no link do desafio e começarás no terminal virtual.
+Clica no link do desafio e poderás testar o terminal virtual. A outra forma é candidatares-te à HackerSchool! :)
 
 ### 2. Usa Comandos Unix
 ```bash
@@ -128,6 +128,7 @@ Criado com ❤️ para encontrar os melhores talentos.
 **Pronto para o desafio? Boa sorte! 🔥**
 
 </div>
+
 
 
 
